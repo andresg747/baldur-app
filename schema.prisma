@@ -53,3 +53,58 @@ model VerificationToken {
 
   @@unique([identifier, token])
 }
+
+model Blockchain {
+  id          String    @id @default(cuid())
+  name        String
+  websiteUrl  String?
+  scannerUrl  String?
+  project     Project[]
+  tokenId     String
+  token       Token[]
+}
+
+enum ProjectType {
+  NFT_GAME
+  NFT_COLLECTIBLES
+  UNDEFINED
+}
+
+enum TokenType {
+  GOVERNANCE
+  UTILITY
+  MIXED
+  NATIVE
+}
+
+model Token {
+  id                   String       @id @default(cuid())
+  tokenName            String
+  tokenSymbol          String
+  tokenContractAddress String?
+  tokenImageURL        String?
+  projectId            String
+  tokenType            TokenType
+  project              Project      @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  Blockchain           Blockchain[]
+}
+
+model Project {
+  id            String       @id @default(cuid())
+  name          String
+  bannerUrl     String?
+  description   String?      @db.Text
+  type          ProjectType  @default(UNDEFINED)
+  websiteUrl    String
+  tokens        Token[]
+  whitepaperUrl String?
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+  Blockchain    Blockchain[]
+  telegramUrl   String?
+  discordUrl    String?
+  twitterUrl    String?
+  facebookUrl   String?
+  instagramUrl  String?
+  blogUrl       String?
+}

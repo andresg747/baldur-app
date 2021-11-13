@@ -12,7 +12,8 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "db:up": "npx prisma migrate dev && npx prisma generate"
   },
   "author": "Iain Collins <me@iaincollins.com>",
   "contributors": [
@@ -30,5 +31,6 @@
   },
   "devDependencies": {
     "prisma": "^3.4.2"
-  }
+  },
+  "type": "module"
 }

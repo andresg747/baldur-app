@@ -1,5 +1,4 @@
 import { SessionProvider } from 'next-auth/react'
-import { signIn, signOut, useSession } from 'next-auth/react'
 import './styles.css'
 
 // Use the <SessionProvider> to improve performance and allow components that call

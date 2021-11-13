@@ -1,11 +1,12 @@
-import { Provider } from 'next-auth/client'
+import { SessionProvider } from 'next-auth/react'
+import { signIn, signOut, useSession } from 'next-auth/react'
 import './styles.css'
 
-// Use the <Provider> to improve performance and allow components that call
+// Use the <SessionProvider> to improve performance and allow components that call
 // `useSession()` anywhere in your application to access the `session` object.
-export default function App ({ Component, pageProps }) {
+export default function App({ Component, pageProps }) {
   return (
-    <Provider
+    <SessionProvider
       // Provider options are not required but can be useful in situations where
       // you have a short session maxAge time. Shown here with default values.
       options={{
@@ -24,7 +25,11 @@ export default function App ({ Component, pageProps }) {
         keepAlive: 0
       }}
       session={pageProps.session} >
-      <Component {...pageProps} />
-    </Provider>
+      <>
+        <div>
+          <Component {...pageProps} />
+        </div>
+      </>
+    </SessionProvider>
   )
 }

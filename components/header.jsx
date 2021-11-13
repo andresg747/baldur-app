@@ -26,7 +26,7 @@ export default function Header() {
           </ul>
         </nav>
         <div className={styles.signedInStatus}>
-          <p className={`nojs-show ${(!session && loading) ? styles.loading : styles.loaded} ${styles.signIn}`}>
+          <p className={`nojs-show ${(!session && loading) ? styles.loading : styles.loaded} ${(!session && styles.signIn)}`}>
             {!session && <>
               <Link href={`/api/auth/signin`}>
                 <Button className={styles.button} type="primary" size="large" onClick={(e) => {
